@@ -60,9 +60,14 @@ agent = ProfessionalOpenClawAgent(
 ```
 
 ### 5. Deploy
-Run your agent in demo mode:
+Run a basic agent demo:
 ```bash
 python examples/example_agent.py
+```
+
+Or run the **Project Leader** use case (Ansible Mesh Optimization):
+```bash
+python examples/project_leader_demo.py
 ```
 
 Or run the autonomous monitoring loop:

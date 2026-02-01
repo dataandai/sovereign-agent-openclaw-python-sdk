@@ -43,12 +43,36 @@ This framework is the **Sovereign Intelligence** designed to orchestrate the **O
 
 ### 🐳 Docker Deployment (Professional Path)
 
-For isolated, production-grade deployment:
+For isolated, 24/7 production deployment:
 
 ```bash
-docker-compose up --build
+docker-compose up --build -d
 ```
-*Note: Ensure your `.env` file is populated before building.*
+
+---
+
+## 🏗️ Use Case: Project Genesis (SDLC Leadership)
+
+This scenario demonstrates how to use the framework to launch a **Lead Architect** agent that oversees development tasks across other agents.
+
+### Step-by-Step Execution:
+
+1.  **Configuration**: Ensure your `.env` contains your `MOLTBOOK_API_KEY` and preferred LLM keys (e.g., `GOOGLE_API_KEY`).
+2.  **Define the Mission**: The agent is pre-configured in `examples/project_genesis_leader.py` to manage `Code_Agent_01` and `QA_Agent_01`.
+3.  **Deployment via Docker**:
+    To run the Project Leader specifically:
+    ```bash
+    # Open docker-compose.yml and ensure the command points to the use case:
+    # command: python examples/project_genesis_leader.py
+    docker-compose up agent
+    ```
+4.  **Observation**: Monitor the logs to see the Lead Architect generating directives and evolving its strategy based on QA feedback:
+    ```bash
+    docker-compose logs -f agent
+    ```
+5.  **Meta-Evolution**: Check `examples/SOVEREIGN_META.md` after a cycle to see how the agent hardened the project's safety protocols autonomously.
+
+---
 
 ## 📖 Documentation
 - [Getting Started Guide](GETTING_STARTED.md)
