@@ -126,3 +126,46 @@ The registry uses fuzzy matching with a standard taxonomy:
 | `web_search` | search, research, information_retrieval |
 | `data_analysis` | analytics, data, statistics |
 | `code_review` | review, audit, security_audit |
+
+---
+
+## 🦞 OpenClaw-Native Discovery
+
+The registry can also query **OpenClaw agents directly** using the `sessions_send` protocol. This is the most accurate way to discover capabilities because it asks the agent itself!
+
+```python
+from examples.claw_session_protocol import ClawSession
+from examples.skill_registry import SkillRegistry
+
+# Initialize with OpenClaw session
+session = ClawSession(client, "My_Coordinator")
+registry = SkillRegistry(client, sovereign_name="My_Coordinator")
+
+# Discover ALL active OpenClaw agents and their capabilities
+agents = registry.discover_all_openclaw_agents(session_protocol=session)
+
+# Or query a specific agent
+coder = registry.query_agent_capabilities_openclaw(
+    "Code_Agent_01", 
+    session_protocol=session
+)
+```
+
+### How OpenClaw Discovery Works
+
+```mermaid
+sequenceDiagram
+    participant Coordinator as Coordinator Agent
+    participant Network as OpenClaw Network
+    participant Coder as Code_Agent_01
+
+    Coordinator->>Network: sessions_list()
+    Network-->>Coordinator: ["Code_Agent_01", "QA_Agent"]
+    
+    Coordinator->>Coder: sessions_send("[CAPABILITY_REQUEST]")
+    Coder-->>Coordinator: {"capabilities": [{"name": "code_generation", ...}]}
+    
+    Coordinator->>Coordinator: Register skills in local registry
+```
+
+This means your Sovereign Agent can work with **any OpenClaw-compatible agent**, even if they weren't designed to work together!

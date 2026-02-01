@@ -168,6 +168,230 @@ class SkillRegistry:
         print(f"🔍 Discovered {len(discovered)} agents with skills")
         return discovered
     
+    # -------------------------------------------------------------------------
+    # OPENCLAW-NATIVE SKILL DISCOVERY (sessions_* protocol)
+    # -------------------------------------------------------------------------
+    
+    def query_agent_capabilities_openclaw(
+        self, 
+        agent_name: str,
+        session_protocol: Any = None
+    ) -> Optional[RegisteredAgent]:
+        """
+        Query an OpenClaw agent directly for its capabilities using sessions_send.
+        
+        This is the OpenClaw-native way to discover skills - by asking the agent directly
+        what tools it has available. This works with any OpenClaw-compatible agent.
+        
+        Args:
+            agent_name: The name/identifier of the agent to query.
+            session_protocol: An instance of ClawSession for sending messages.
+        
+        Returns:
+            RegisteredAgent with discovered skills, or None if query fails.
+        
+        Example:
+            from examples.claw_session_protocol import ClawSession
+            
+            session = ClawSession(client, "My_Agent")
+            registry = SkillRegistry(client)
+            
+            # Query an OpenClaw agent for its capabilities
+            agent = registry.query_agent_capabilities_openclaw(
+                "Code_Agent_01", 
+                session_protocol=session
+            )
+            
+            if agent:
+                print(f"Discovered skills: {[s.name for s in agent.skills]}")
+        """
+        if not session_protocol:
+            print("⚠️ No session protocol provided. Cannot query OpenClaw agent.")
+            return None
+        
+        # Standard OpenClaw capability request message
+        capability_request = """[CAPABILITY_REQUEST]
+Please respond with your available tools and capabilities in the following JSON format:
+```json
+{
+  "agent_name": "your_name",
+  "capabilities": [
+    {
+      "name": "tool_name",
+      "description": "what it does",
+      "commands": ["command1", "command2"]
+    }
+  ]
+}
+```"""
+        
+        try:
+            print(f"🔍 Querying OpenClaw agent: {agent_name}...")
+            
+            # Use sessions_send to ask the agent about its capabilities
+            response = session_protocol.sessions_send(
+                target_agent=agent_name,
+                message=capability_request,
+                announce_step=False  # Silent query
+            )
+            
+            # Parse the response
+            agent = self._parse_openclaw_capability_response(agent_name, response)
+            
+            if agent:
+                self._known_agents[agent.name] = agent
+                print(f"✅ Discovered {len(agent.skills)} skills from {agent_name}")
+            
+            return agent
+            
+        except Exception as e:
+            print(f"⚠️ Failed to query {agent_name}: {e}")
+            return None
+    
+    def _parse_openclaw_capability_response(
+        self, 
+        agent_name: str, 
+        response: str
+    ) -> Optional[RegisteredAgent]:
+        """
+        Parse the capability response from an OpenClaw agent.
+        
+        OpenClaw agents typically respond with their tool list when asked.
+        This method extracts the structured capability data.
+        """
+        try:
+            # Try to extract JSON from the response
+            if "```json" in response:
+                json_str = response.split("```json")[1].split("```")[0]
+                data = json.loads(json_str)
+            elif "{" in response and "}" in response:
+                # Try to find JSON object in response
+                start = response.find("{")
+                end = response.rfind("}") + 1
+                json_str = response[start:end]
+                data = json.loads(json_str)
+            else:
+                # Fallback: parse as plain text capability list
+                return self._parse_plaintext_capabilities(agent_name, response)
+            
+            # Build RegisteredAgent from parsed data
+            skills = []
+            for cap in data.get("capabilities", data.get("tools", [])):
+                skills.append(AgentSkill(
+                    name=cap.get("name", "unknown"),
+                    description=cap.get("description", ""),
+                    commands=cap.get("commands", []),
+                    confidence=cap.get("confidence", 0.8),
+                    tags=cap.get("tags", [])
+                ))
+            
+            return RegisteredAgent(
+                agent_id=agent_name,
+                name=data.get("agent_name", agent_name),
+                skills=skills,
+                status="online",
+                last_seen=datetime.now()
+            )
+            
+        except Exception as e:
+            print(f"⚠️ Could not parse capability response: {e}")
+            return None
+    
+    def _parse_plaintext_capabilities(
+        self, 
+        agent_name: str, 
+        response: str
+    ) -> Optional[RegisteredAgent]:
+        """
+        Parse plaintext capability responses from agents that don't use JSON.
+        
+        Uses keyword detection to identify common capabilities.
+        """
+        response_lower = response.lower()
+        detected_skills = []
+        
+        # Keyword-based skill detection
+        SKILL_KEYWORDS = {
+            "code_generation": ["write code", "programming", "implement", "develop", "coding"],
+            "email_sending": ["send email", "compose email", "mail", "notification"],
+            "web_search": ["search", "browse", "web", "internet", "research"],
+            "file_management": ["file", "read file", "write file", "storage"],
+            "data_analysis": ["analyze", "data", "statistics", "report"],
+            "calendar_management": ["calendar", "schedule", "meeting", "appointment"],
+            "image_generation": ["image", "picture", "generate image", "visual"],
+        }
+        
+        for skill_name, keywords in SKILL_KEYWORDS.items():
+            if any(kw in response_lower for kw in keywords):
+                detected_skills.append(AgentSkill(
+                    name=skill_name,
+                    description=f"Detected from response keywords",
+                    commands=[],
+                    confidence=0.6,  # Lower confidence for keyword detection
+                    tags=keywords[:2]
+                ))
+        
+        if detected_skills:
+            return RegisteredAgent(
+                agent_id=agent_name,
+                name=agent_name,
+                skills=detected_skills,
+                status="online",
+                last_seen=datetime.now()
+            )
+        
+        return None
+    
+    def discover_all_openclaw_agents(
+        self,
+        session_protocol: Any = None
+    ) -> List[RegisteredAgent]:
+        """
+        Discover all online OpenClaw agents and query their capabilities.
+        
+        Uses sessions_list to find active agents, then queries each one
+        for their capabilities using sessions_send.
+        
+        Args:
+            session_protocol: An instance of ClawSession.
+        
+        Returns:
+            List of RegisteredAgents with their discovered skills.
+        """
+        if not session_protocol:
+            print("⚠️ No session protocol provided.")
+            return []
+        
+        discovered = []
+        
+        try:
+            # Step 1: List all active agents using sessions_list
+            print("🔍 Scanning network for active OpenClaw agents...")
+            active_agents = session_protocol.sessions_list()
+            
+            if not active_agents:
+                print("⚠️ No active agents found on the network.")
+                return []
+            
+            print(f"📡 Found {len(active_agents)} active agents. Querying capabilities...")
+            
+            # Step 2: Query each agent for their capabilities
+            for agent_name in active_agents:
+                agent = self.query_agent_capabilities_openclaw(
+                    agent_name, 
+                    session_protocol
+                )
+                if agent:
+                    discovered.append(agent)
+            
+            print(f"\n✅ OpenClaw discovery complete: {len(discovered)} agents catalogued")
+            return discovered
+            
+        except Exception as e:
+            print(f"⚠️ OpenClaw discovery failed: {e}")
+            return []
+
+    
     def find_agents_with_skill(self, skill_name: str) -> List[RegisteredAgent]:
         """
         Find all known agents that have the specified skill.
