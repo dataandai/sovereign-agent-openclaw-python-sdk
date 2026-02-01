@@ -3,7 +3,7 @@ USE CASE: Project Genesis - Decentralized SDLC Orchestration.
 Demonstrates the Sovereign Agent leading a multi-agent development project.
 """
 
-from examples.sovereign_engine import ProfessionalOpenClawAgent
+from examples.sovereign_engine import SovereignAgent
 
 # LEADER SOUL: Architect and Strategic Lead
 LEADER_SOUL = """
@@ -25,7 +25,7 @@ Objective: Deploy the 'Genesis Core' protocol within 3 network cycles.
 def run_project_genesis_demo():
     print("🦞 Initializing Project Leader: Genesis_Architect_01...")
     
-    leader = ProfessionalOpenClawAgent(
+    leader = SovereignAgent(
         name="Genesis_Architect_01",
         soul=LEADER_SOUL,
         mission=PROJECT_MISSION,

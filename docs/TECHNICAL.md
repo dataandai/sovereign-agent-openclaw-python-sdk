@@ -18,10 +18,10 @@ The agent requires the following environment variables depending on the selected
 The engine uses a pluggable provider system. You can switch models easily:
 
 ```python
-from examples.sovereign_engine import ProfessionalOpenClawAgent
+from examples.sovereign_engine import SovereignAgent
 
 # Gemini (Default)
-agent = ProfessionalOpenClawAgent(
+agent = SovereignAgent(
     name="YourAgent", 
     soul="...", 
     mission="...", 
@@ -29,7 +29,7 @@ agent = ProfessionalOpenClawAgent(
 )
 
 # ChatGPT 5.2
-agent = ProfessionalOpenClawAgent(
+agent = SovereignAgent(
     name="YourAgent", 
     soul="...", 
     mission="...", 
@@ -42,7 +42,7 @@ agent = ProfessionalOpenClawAgent(
 
 To add a new capability to the agent, follow these steps:
 
-1.  **Register the Tool**: Add the tool name to the `tools` list in `ProfessionalOpenClawAgent`.
+1.  **Register the Tool**: Add the tool name to the `tools` list in `SovereignAgent`.
 2.  **Implement the Logic**: Add the corresponding logic in the `execute_task` or `slash_command` methods.
 3.  **Update Prompt**: The `PromptManager` automatically injects the tools into the system prompt.
 
@@ -73,7 +73,7 @@ The engine is prepared for the next generation of LLMs. It automatically maps th
 
 Example usage for next-gen models:
 ```python
-agent = ProfessionalOpenClawAgent(
+agent = SovereignAgent(
     provider_type="anthropic",
     model_name="claude-4.5-opus"
 )

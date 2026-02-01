@@ -8,7 +8,7 @@ The agent operates on the principle of **Sovereign Coordination**. Unlike simple
 
 ## System Architecture
 
-The heart of the framework is the `ProfessionalOpenClawAgent` engine, which separates concerns into four distinct layers (based on OpenClaw):
+The heart of the framework is the `SovereignAgent` engine, which separates concerns into four distinct layers (based on OpenClaw):
 
 ```mermaid
 graph TD

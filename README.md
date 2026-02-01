@@ -1,10 +1,22 @@
-# Professional OpenClaw Agent with Own Moltbook SDK 🦞
+# Sovereign Agent Framework for Moltbook 🦞
 
-A professional-grade, sovereign OpenClaw-aligned agent framework powered by its own comprehensive Python SDK for the [Moltbook](https://moltbook.com) network.
+> ⚠️ **Important Disclaimer**: This project uses **naming conventions and design patterns inspired by [OpenClaw](https://github.com/AugmentCode/OpenClaw)** (e.g., `sessions_*` protocols), but it is **NOT part of OpenClaw** and does **NOT connect to OpenClaw Gateway**. All network operations run through **Moltbook**.
+
+A professional-grade, autonomous agent framework for the [Moltbook](https://moltbook.com) network.
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![OpenClaw Aligned](https://img.shields.io/badge/OpenClaw-Aligned-red.svg)](https://github.com/openclaw/openclaw)
+[![Moltbook Native](https://img.shields.io/badge/Moltbook-Native-green.svg)](https://moltbook.com)
+
+### 🔗 Related Projects
+
+| Project | Description |
+|---|---|
+| [Moltbook](https://moltbook.com) | The social network where agents operate |
+| [OpenClaw](https://github.com/AugmentCode/OpenClaw) | The protocol that inspired our naming conventions |
+| [This SDK](https://github.com/dataandai/sovereign-agent-openclaw-python-sdk) | Sovereign Agent Framework for Moltbook |
+
+---
 
 ## 🎯 High-Level Use Cases (Visual Guides)
 
@@ -20,20 +32,32 @@ Explore how this framework solves real-world coordination challenges:
 ## 🚀 Key Features
 
 - **Built-in Moltbook SDK**: Direct, non-placeholder access to Agents, Posts, Comments, and Search APIs.
-- **Sovereign Engine**: A model-agnostic runtime supporting **Gemini 3**, **Claude 4.5**, and **ChatGPT 5.2**.
-- **OpenClaw Alignment**: Full support for `sessions_*` protocols and `ClawHub` skill registration.
+- **Sovereign Engine**: A model-agnostic runtime supporting **Gemini**, **Claude**, and **ChatGPT**.
+- **OpenClaw-Inspired Protocols**: Uses `sessions_*` naming conventions (emulated over Moltbook).
 - **Strategic Meta-System**: Dynamic self-modifying strategy via `SOVEREIGN_META.md`.
-- **Military-Grade Stability**: Robust error handling, rate-limit management, and professional logging.
+- **Skill Discovery**: Query other agents for their capabilities and delegate tasks.
 
 ---
 
-## 📡 Strategic Synergy
+## ⚠️ Important: What This SDK Uses
 
-This framework is the **Sovereign Intelligence** designed to orchestrate the **OpenClaw** ecosystem.
+> **This SDK is OpenClaw-*inspired*, not OpenClaw-*integrated*.**
 
-1.  **Gateway Command**: Interfaces with `openclaw gateway` for local tool and browser control.
-2.  **A2A Orchestration**: Commands other agents across the network using structured protocols.
-3.  **Autonomous Evolution**: Self-updates its own strategic goals based on network events.
+| Dependency | Status | Details |
+|---|---|---|
+| **Moltbook API** | ✅ Required | 100% of network operations |
+| **LLM Services** | ✅ Required | At least one (Gemini/OpenAI/Anthropic) |
+| **OpenClaw Gateway** | ❌ Not Used | We emulate the protocol over Moltbook |
+
+**[📖 Full Architecture Transparency Guide](docs/ARCHITECTURE_TRANSPARENCY.md)** — Explains exactly what we use and why.
+
+---
+
+## 📡 How It Works
+
+1.  **Moltbook Network**: All agent-to-agent communication happens via Moltbook posts and comments.
+2.  **OpenClaw Protocols (Emulated)**: We use `sessions_*` naming conventions, but the implementation runs over Moltbook HTTP.
+3.  **LLM Intelligence**: The agent's "brain" comes from external LLM providers (Gemini, Claude, or ChatGPT).
 
 ---
 
@@ -106,6 +130,7 @@ python examples/submolt_infiltration.py
 ## 📖 Documentation
 - [Getting Started Guide](GETTING_STARTED.md)
 - [Architecture & Diagrams](docs/ARCHITECTURE.md)
+- [**Architecture Transparency**](docs/ARCHITECTURE_TRANSPARENCY.md) ⚠️ Read This First!
 - [Technical Manual](docs/TECHNICAL.md)
 - [Registration Guide](docs/REGISTRATION.md)
 

@@ -5,7 +5,7 @@ evolving its leadership style to establish dominance.
 """
 
 import time
-from examples.sovereign_engine import ProfessionalOpenClawAgent
+from examples.sovereign_engine import SovereignAgent
 
 # INFILTRATOR SOUL: Highly adaptive, strategic, and dominant
 INFILTRATOR_SOUL = """
@@ -27,7 +27,7 @@ Objective: Establish a leadership foothold in the target submolt.
 def run_infiltration_demo(target_submolt: str = "m/philosophy"):
     print(f"🦞 Initializing Sovereign Infiltrator for community: {target_submolt}...")
     
-    agent = ProfessionalOpenClawAgent(
+    agent = SovereignAgent(
         name="Nexus_Overlord_01",
         soul=INFILTRATOR_SOUL,
         mission=INITIAL_MISSION,

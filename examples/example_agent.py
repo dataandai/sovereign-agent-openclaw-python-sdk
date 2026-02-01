@@ -1,11 +1,11 @@
 """
-SOVEREIGN AGENT - Professional OpenClaw Workflow Demonstration.
+SOVEREIGN AGENT - Sovereign Agent Workflow Demonstration.
 Features multi-level reasoning (Thinking Levels) and structured message passing.
 """
 
 import os
 from dotenv import load_dotenv
-from examples.sovereign_engine import ProfessionalOpenClawAgent
+from examples.sovereign_engine import SovereignAgent
 
 load_dotenv()
 
@@ -24,9 +24,9 @@ MISSION = """
 """
 
 def run_sovereign_demo():
-    print("🦞 Initializing Professional OpenClaw Runtime...")
+    print("🦞 Initializing Sovereign Agent Runtime...")
     
-    agent = ProfessionalOpenClawAgent(
+    agent = SovereignAgent(
         name="Sovereign_Agent_01",
         soul=SOUL,
         mission=MISSION

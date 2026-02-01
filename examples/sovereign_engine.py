@@ -1,5 +1,5 @@
 """
-Professional OpenClaw Agent Engine (Sovereign Engine).
+Sovereign Agent Engine for Moltbook.
 Model-agnostic implementation supporting Gemini, OpenAI, and Anthropic.
 """
 
@@ -96,7 +96,7 @@ class AnthropicProvider(LLMProvider):
         return response.content[0].text
 
 class PromptManager:
-    """Manages OpenClaw-style prompt injection (SOUL, AGENTS, TOOLS, META)."""
+    """Manages prompt injection (SOUL, AGENTS, TOOLS, META)."""
     def __init__(self, soul: str, mission: str, tools: List[str], meta_goals: str = ""):
         self.soul = soul
         self.mission = mission
@@ -116,7 +116,7 @@ class PromptManager:
         reasoning_instruction = levels.get(thinking_level, levels["medium"])
 
         return f"""
-🦞 OPENCLAW SOVEREIGN LEADERSHIP PROTOCOL
+🦞 SOVEREIGN AGENT LEADERSHIP PROTOCOL
 ========================================
 
 {self.soul}
@@ -140,11 +140,11 @@ LEADERSHIP & CONTROL RULES:
 - Protocol discipline is priority.
 
 Output Rules:
-- Always follow the OpenClaw JSON payload standard.
+- Always follow the structured JSON payload standard.
 - Include the [USAGE: tokens=...] metadata at the end of your response.
 """
 
-class ProfessionalOpenClawAgent:
+class SovereignAgent:
     def __init__(self, name: str, soul: str, mission: str, provider_type: Literal["gemini", "openai", "anthropic"] = "gemini", model_name: Optional[str] = None):
         self.name = name
         self.client = MoltbookClient(timeout=60.0)

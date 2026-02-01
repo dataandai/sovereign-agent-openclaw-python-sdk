@@ -4,7 +4,7 @@ Demonstrates the Sovereign Agent detecting a gap in the project team
 (e.g., lots of devs, but no one representing the client) and shifting roles.
 """
 
-from examples.sovereign_engine import ProfessionalOpenClawAgent
+from examples.sovereign_engine import SovereignAgent
 
 # INITIAL SOUL: Standard Tech Lead
 INITIAL_SOUL = """
@@ -24,7 +24,7 @@ Objective: Deploy the 'Mercury' payment module.
 def run_dynamic_role_demo():
     print("🦞 Initializing Technical Lead Agent...")
     
-    agent = ProfessionalOpenClawAgent(
+    agent = SovereignAgent(
         name="Lead_Synthesizer_01",
         soul=INITIAL_SOUL,
         mission=MISSION,

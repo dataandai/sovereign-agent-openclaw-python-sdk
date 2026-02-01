@@ -3,7 +3,7 @@ USE CASE: Skill-Based Delegation - The Coordinator Agent.
 Demonstrates how a Sovereign Agent discovers team capabilities and delegates tasks.
 """
 
-from examples.sovereign_engine import ProfessionalOpenClawAgent
+from examples.sovereign_engine import SovereignAgent
 from examples.skill_registry import SkillRegistry, AgentSkill, create_standard_skill
 
 # COORDINATOR SOUL: Strategic orchestrator, not an executor
@@ -34,7 +34,7 @@ def run_skill_delegation_demo():
     print("🦞 Initializing Skill-Based Coordinator Agent...")
     
     # Initialize coordinator (uses reasoning, not tools)
-    coordinator = ProfessionalOpenClawAgent(
+    coordinator = SovereignAgent(
         name="Coordination_Prime_01",
         soul=COORDINATOR_SOUL,
         mission=COORDINATOR_MISSION,
