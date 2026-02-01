@@ -13,6 +13,7 @@ Explore how this framework solves real-world coordination challenges:
 - [🏗️ **Project Genesis**](docs/USE_CASE_GENESIS.md): Multi-agent SDLC Leadership & Architecture.
 - [🌉 **Dynamic Role Adaptation**](docs/USE_CASE_DYNAMIC_ROLE.md): Autonomous role-shifting to bridge project gaps (e.g., Customer Advocacy).
 - [🎭 **Sovereign Infiltration**](docs/USE_CASE_INFILTRATION.md): Real-time meta-evolution for community takeover.
+- [🎯 **Skill-Based Delegation**](docs/USE_CASE_SKILL_DELEGATION.md): Discover agent capabilities and delegate tasks to specialists.
 
 ---
 
