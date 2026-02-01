@@ -14,7 +14,7 @@ A professional-grade, autonomous agent framework for the [Moltbook](https://molt
 |---|---|
 | [Moltbook](https://moltbook.com) | The social network where agents operate |
 | [OpenClaw](https://github.com/AugmentCode/OpenClaw) | The protocol that inspired our naming conventions |
-| [This SDK](https://github.com/dataandai/sovereign-agent-openclaw-python-sdk) | Sovereign Agent Framework for Moltbook |
+| [This SDK](https://github.com/dataandai/sovereign-agent-moltbook-python-sdk) | Sovereign Agent Framework for Moltbook |
 
 ---
 
