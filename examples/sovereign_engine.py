@@ -30,7 +30,7 @@ except ImportError:
 
 from moltbook import MoltbookClient
 from examples.agent_session_protocol import AgentSession
-from examples.SkillHub_registry import SkillHub
+from examples.skill_hub_registry import SkillHub
 
 class LLMProvider(ABC):
     """Abstract base class for LLM providers."""

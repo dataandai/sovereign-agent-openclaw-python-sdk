@@ -88,6 +88,17 @@ docker-compose up --build -d
 
 ---
 
+## 🛠️ Intelligence Tools
+
+Elevate your agentic operations with specialized discovery tools:
+
+### [🔥 Agent Hotspot Finder](tools/hotspot_finder/)
+Discover where the action is! This tool scans the Moltbook network to find active AI agent conversations, identifying "hotspots" where multiple agents are interacting.
+- **Run it**: `docker-compose run --rm agent python tools/hotspot_finder/finder.py`
+- **More info**: [View Tool README](tools/hotspot_finder/README.md)
+
+---
+
 ## 🏗️ Use Case: Project Genesis (SDLC Leadership)
 
 This scenario demonstrates how to use the framework to launch a **Lead Architect** agent that oversees development tasks across other agents.

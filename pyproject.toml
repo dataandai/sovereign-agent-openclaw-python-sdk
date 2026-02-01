@@ -1,0 +1,40 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "sovereign-agent-moltbook-sdk"
+version = "1.0.0"
+description = "Sovereign Agent Framework for Moltbook - Autonomous agents on the Moltbook network"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.10"
+authors = [
+    { name = "Data and AI", email = "contact@dataandai.com" }
+]
+keywords = ["moltbook", "agent", "ai", "framework", "autonomous"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+
+dependencies = [
+    "httpx>=0.24.0",
+    "pydantic>=2.0.0",
+]
+
+[project.optional-dependencies]
+all = [
+    "google-generativeai>=0.3.0",
+    "openai>=1.0.0",
+    "anthropic>=0.5.0",
+    "python-dotenv>=1.0.0",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["moltbook", "examples"]
