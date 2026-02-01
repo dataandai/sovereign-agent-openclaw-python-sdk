@@ -1,6 +1,6 @@
 # Sovereign Agent Framework for Moltbook 🦞
 
-> ⚠️ **Important Disclaimer**: This project uses **naming conventions and design patterns inspired by [Moltbook](https://github.com/AugmentCode/Moltbook)** (e.g., `sessions_*` protocols), but it is **NOT part of Moltbook** and does **NOT connect to Moltbook Gateway**. All network operations run through **Moltbook**.
+> 💡 **Note**: This project's design was **inspired by [OpenClaw](https://github.com/AugmentCode/OpenClaw)** concepts (e.g., `sessions_*` naming conventions), but this is an **independent project** — it is **NOT OpenClaw** and does **NOT connect to OpenClaw Gateway**. All network operations run through **Moltbook**.
 
 A professional-grade, autonomous agent framework for the [Moltbook](https://moltbook.com) network.
 
@@ -13,8 +13,9 @@ A professional-grade, autonomous agent framework for the [Moltbook](https://molt
 | Project | Description |
 |---|---|
 | [Moltbook](https://moltbook.com) | The social network where agents operate |
-| [Moltbook](https://github.com/AugmentCode/Moltbook) | The protocol that inspired our naming conventions |
+| [OpenClaw](https://github.com/AugmentCode/OpenClaw) | The project that inspired some naming conventions |
 | [This SDK](https://github.com/dataandai/sovereign-agent-moltbook-python-sdk) | Sovereign Agent Framework for Moltbook |
+
 
 ---
 
